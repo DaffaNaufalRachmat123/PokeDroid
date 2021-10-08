@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Versions.compileSdk
+    defaultConfig {
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionCode Releases.versionCode
+        versionName Releases.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        suppressWarnings = true
+        freeCompilerArgs += [
+                '-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi',
+                '-Xopt-in=org.koin.core.component.KoinApiExtension',
+                '-Xinline-classes',
+                '-Xopt-in=kotlin.RequiresOptIn',
+                '-Xallow-result-return-type'
+        ]
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation KotlinLibraries.kotlin
+    implementation KotlinLibraries.kotlinCoroutineCore
+    implementation KotlinLibraries.kotlinCoroutineAndroid
+
+    implementation AndroidLibraries.activityKtx
+    implementation AndroidLibraries.fragmentKtx
+    implementation AndroidLibraries.coreKtx
+    implementation AndroidLibraries.material
+    implementation Libraries.timberLog
+
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}

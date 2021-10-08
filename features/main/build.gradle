@@ -1,0 +1,31 @@
+apply from: '../../android_feature_dependencies.gradle'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+android {
+}
+
+dependencies {
+
+    // KotPref
+    api Libraries.kotPrefCore
+    api Libraries.kotPrefInit
+    api Libraries.kotPrefGson
+    api Libraries.gson
+
+    // NETWORK
+    api Libraries.retrofit
+    api Libraries.retrofitGsonConverter
+    api Libraries.okhttp
+    api Libraries.httpLoggingInterceptor
+    debugImplementation Libraries.chuckerDebug
+    releaseImplementation Libraries.chuckerRelease
+
+    // ANDROID
+    api KotlinLibraries.kotlinCoroutineCore
+    api KotlinLibraries.kotlinCoroutineAndroid
+    implementation AndroidLibraries.recyclerView
+
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+}

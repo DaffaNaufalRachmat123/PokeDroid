@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+apply from: '../android_core_dependencies.gradle'
+apply from: '../android_commons.gradle'
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+    javacOptions {
+        option("-Xmaxerrs", 500)
+    }
+}
+
+dependencies {
+    implementation project(Modules.Core)
+    implementation project(Modules.Navigation)
+    implementation project(Modules.UiResources)
+    implementation Libraries.BRVAH
+
+    api KotlinLibraries.kotlinCoroutinePlayService
+    api AndroidLibraries.googleClient
+    api AndroidLibraries.firebaseConfig
+    implementation AndroidLibraries.webkit
+    implementation AndroidLibraries.browser
+    implementation Libraries.retrofit
+    implementation Libraries.ioShimmer
+    implementation Libraries.retrofitGsonConverter
+    implementation Libraries.calendarView
+
+    api AndroidLibraries.crashlytics
+
+    implementation Libraries.eventBusLib
+    implementation Libraries.facebookShimmer
+    implementation Libraries.deeplinkdispatch
+    kapt Libraries.deeplinkdispatchProcessor
+
+    api(Libraries.glide)
+    api(Libraries.glideHttpIntegration)
+    api Libraries.glideTransformations
+    kapt Libraries.glideKapt
+
+}

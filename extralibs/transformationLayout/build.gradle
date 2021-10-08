@@ -1,0 +1,4 @@
+apply from: '../../android_libs_dependencies.gradle'
+
+dependencies {
+}

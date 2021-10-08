@@ -1,0 +1,51 @@
+/**
+ * Feature dependencies
+ */
+apply plugin: 'com.android.library'
+apply from: '../../android_core_dependencies.gradle'
+apply from: '../../android_commons.gradle'
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+    javacOptions {
+        option("-Xmaxerrs", 500)
+    }
+    arguments {
+        arg("deepLink.incremental", "true")
+        arg("deepLink.customAnnotations", "com.androidpk.common.utils.WebDeepLink")
+    }
+}
+
+dependencies {
+    implementation project(Modules.Common)
+    implementation project(Modules.UiResources)
+    implementation project(Modules.Core)
+    implementation project(Modules.Navigation)
+
+    implementation Libraries.eventBusLib
+    implementation Libraries.BRVAH
+    implementation Libraries.singleRowCalendar
+    implementation Libraries.facebookShimmer
+    implementation Libraries.shapeView
+    implementation Libraries.revealAnimation
+    implementation Libraries.swipeButton
+    implementation Libraries.mdCore
+    implementation Libraries.mdDateTime
+    implementation Libraries.mdLifecycle
+    implementation Libraries.materialCalendarView
+    implementation Libraries.mdBottomSheet
+    implementation Libraries.timePickerSeconds
+    implementation Libraries.sdpAndroid
+    implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.3.0'
+    implementation AndroidLibraries.flexBox
+
+
+    implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:2.+"
+    testImplementation 'android.arch.core:core-testing:1.0.0-rc1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}

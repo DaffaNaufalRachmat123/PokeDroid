@@ -1,0 +1,24 @@
+dependencies {
+    // ANDROID TEST
+    androidTestImplementation TestLibraries.androidTestRunner
+    androidTestImplementation TestLibraries.espresso
+    // KOIN
+    androidTestImplementation TestLibraries.koin
+    // ANDROID
+    androidTestImplementation TestLibraries.archCoreTest
+    androidTestImplementation TestLibraries.junit
+    // MOCK
+    androidTestImplementation TestLibraries.mockk
+
+
+    testImplementation TestLibraries.androidTestRunner
+    testImplementation TestLibraries.junit
+    testImplementation TestLibraries.kotlinTest
+    testImplementation TestLibraries.koin
+    testImplementation TestLibraries.coroutine
+    testImplementation TestLibraries.archCoreTest
+
+    api (TestLibraries.mockk) { exclude module: 'objenesis' }
+    api TestLibraries.mockitoKotlin
+    api TestLibraries.assertjCore
+}

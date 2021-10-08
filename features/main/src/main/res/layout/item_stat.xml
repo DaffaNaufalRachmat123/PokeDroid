@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="15dp"
+    android:paddingEnd="15dp"
+    android:paddingTop="14dp"
+    android:paddingBottom="14dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.pokedroid.common.fonts.CustomTextView
+        android:id="@+id/nameText"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:text="Attack"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <com.pokedroid.common.fonts.CustomTextView
+        android:id="@+id/effortText"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@id/nameText"
+        app:layout_constraintTop_toTopOf="@id/nameText"
+        app:layout_constraintBottom_toBottomOf="@id/nameText"/>
+
+    <ProgressBar
+        android:id="@+id/progressIndicator"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_progress"
+        android:layout_marginStart="10dp"
+        android:indeterminate="false"
+        android:progress="0"
+        android:progressDrawable="@drawable/custom_progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/effortText"
+        app:layout_constraintTop_toTopOf="@id/effortText"
+        app:layout_constraintStart_toEndOf="@+id/effortText" />
+</androidx.constraintlayout.widget.ConstraintLayout>

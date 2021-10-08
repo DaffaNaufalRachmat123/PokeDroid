@@ -1,0 +1,84 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+//Define BuildSecrets
+def buildEnvironmentPropertiesFile = rootProject.file("environment.properties")
+def buildEnvironmentProperties = new Properties()
+buildEnvironmentProperties.load(new FileInputStream(buildEnvironmentPropertiesFile))
+
+
+
+android {
+    compileSdkVersion Versions.compileSdk
+    defaultConfig {
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionCode Releases.versionCode
+        versionName Releases.versionName
+//        multiDexEnabled true
+    }
+
+    flavorDimensions("environment")
+    productFlavors {
+        dev {
+            dimension "environment"
+            versionNameSuffix "-dev"
+            buildConfigField("String", "BASE_URL", buildEnvironmentProperties["DEV_ENDPOINT"])
+        }
+
+        staging {
+            dimension "environment"
+            versionNameSuffix "-staging"
+            buildConfigField("String", "BASE_URL", buildEnvironmentProperties["STAG_ENDPOINT"])
+        }
+
+        prod {
+            dimension "environment"
+            buildConfigField("String", "BASE_URL", buildEnvironmentProperties["PROD_ENDPOINT"])
+        }
+    }
+
+
+    compileOptions {
+        // Flag to enable support for the new language APIs
+//        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        suppressWarnings = true
+        freeCompilerArgs += [
+                '-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi',
+                '-Xopt-in=org.koin.core.component.KoinApiExtension',
+                '-Xinline-classes',
+                '-Xopt-in=kotlin.RequiresOptIn',
+                '-Xallow-result-return-type'
+        ]
+    }
+
+    dexOptions {
+        preDexLibraries = true
+        javaMaxHeapSize "4g"
+    }
+
+    lintOptions {
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation KotlinLibraries.kotlin
+    implementation Libraries.timberLog
+}

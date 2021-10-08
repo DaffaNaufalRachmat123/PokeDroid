@@ -1,0 +1,178 @@
+apply plugin: 'com.android.application'
+apply from: '../android_commons.gradle'
+//apply plugin: 'com.google.firebase.crashlytics'
+
+android {
+    defaultConfig {
+        applicationId ApplicationId.id
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+        multiDexEnabled = true
+
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'pokedroid_123'
+            keyPassword 'Naufal Inside123'
+            storeFile file('pokedroid.keystore')
+            storePassword 'Naufal Inside123'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            //applicationIdSuffix = ".dev"
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def newName
+            def dateNow = new Date().format('ddMMYY')
+            def timeNow = new Date().format('HHmm')
+            if (variant.buildType.name == 'debug') {
+                newName = "${variant.name}_${variant.versionName}_debug.apk"
+            } else {
+                newName = 'FrezzFarm' + variant.name + '_' +
+                        variant.versionName + '_' + dateNow + '_' + timeNow + '.apk'
+            }
+            outputFileName = newName
+        }
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dexOptions {
+        preDexLibraries = true
+        javaMaxHeapSize "4g"
+    }
+
+    lintOptions {
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+    }
+
+    androidExtensions {
+        experimental = true
+        features = ["parcelize"]
+    }
+
+
+    packagingOptions {
+        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+        exclude 'lib/*/libRSSupport.so'
+        exclude 'lib/*/librsjni.so'
+        exclude 'lib/*/librsjni_androidx.so'
+        exclude 'lib/*/libblasV8.so'
+        exclude 'lib/*/libconceal.so'
+        exclude 'lib/*/libconcealjni.so'
+        exclude 'lib/*/libfb.so'
+        doNotStrip '*/mips/*.so'
+        doNotStrip '*/mips64/*.so'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'ASL-2.0.txt'
+        exclude 'META-INF/ASL-2.0.txt'
+        exclude 'META-INF/LGPL-3.0.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processors'
+        exclude 'META-INF/app_debug.kotlin_module'
+        pickFirst 'protobuf.meta'
+        exclude 'META-INF/library_release.kotlin_module'
+        pickFirst 'META-INF/kotlinx-io.kotlin_module'
+        pickFirst 'META-INF/atomicfu.kotlin_module'
+        pickFirst 'META-INF/kotlinx-coroutines-io.kotlin_module'
+        pickFirst 'META-INF/kotlinx-coroutines-core.kotlin_module'
+        pickFirst 'META-INF/kotlinx-serialization-runtime.kotlin_module'
+    }
+}
+
+configurations {
+    all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+    all*.exclude group: 'commons-logging', module: 'commons-logging'
+    all*.exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+}
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+    javacOptions {
+        option("-Xmaxerrs", 500)
+    }
+    arguments {
+        arg("deepLinkDoc.output", "${buildDir}/doc/deeplinks.txt")
+        arg("deepLink.incremental", "true")
+        arg("deepLink.customAnnotations", "com.klinday.common.utils.WebDeepLink")
+    }
+}
+
+dependencies {
+    // COMMON
+    implementation project(Modules.Common)
+    // Core Modules
+    implementation project(Modules.Core)
+    implementation project(Modules.UiResources)
+    // Navigation Modules
+    implementation project(Modules.Navigation)
+    implementation project(Modules.featureMain)
+
+
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+
+    // Shimmer
+    implementation Libraries.facebookShimmer
+
+    // Calendar
+    implementation Libraries.calendarView
+    // ANDROID
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.lifecycleRuntimeKtx
+    implementation AndroidLibraries.navigation
+    implementation AndroidLibraries.navigationFrag
+    implementation AndroidLibraries.multiDex
+    implementation AndroidLibraries.workManagerKtx
+    implementation AndroidLibraries.firebaseMessaging
+    //implementation AndroidLibraries.crashlytics
+
+    implementation "androidx.startup:startup-runtime:1.0.0"
+    implementation 'fr.bipi.treessence:treessence:0.3.2'
+
+    implementation Libraries.deeplinkdispatch
+    kapt Libraries.deeplinkdispatchProcessor
+
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+    implementation "com.blankj:free-proguard:1.0.2"
+    //Leak Canary
+//    debugImplementation Libraries.leakCanary
+}
+//apply plugin: 'com.google.gms.google-services'

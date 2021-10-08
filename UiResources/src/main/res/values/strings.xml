@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="remaining_stock">Sisa Stok : </string>
+    <string name="item_inventory_name">Nama Barang</string>
+    <item name="navigation_bar_item_large_label_view" type="id"/>
+    <item name="navigation_bar_item_small_label_view" type="id"/>
+</resources>
