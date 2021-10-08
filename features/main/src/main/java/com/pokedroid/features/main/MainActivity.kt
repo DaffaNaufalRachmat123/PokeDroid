@@ -12,12 +12,14 @@ import com.dylanc.viewbinding.binding
 import com.github.ajalt.timberkt.d
 import com.pokedroid.common.base.BaseActivity
 import com.pokedroid.common.extension.singleItemClick
+import com.pokedroid.common.extension.startFeature
 import com.pokedroid.common.extension.toast
 import com.pokedroid.common.utils.CustomLoadMoreView
 import com.pokedroid.common.utils.ViewState
 import com.pokedroid.common.view.statelayout.StateLayout
 import com.pokedroid.features.main.adapter.PokemonAdapter
 import com.pokedroid.features.main.databinding.ActivityMainBinding
+import com.pokedroid.navigation.Activities
 
 class MainActivity : BaseActivity<MainViewModel>(R.layout.activity_main) {
     private val binding by binding<ActivityMainBinding>()
@@ -91,7 +93,7 @@ class MainActivity : BaseActivity<MainViewModel>(R.layout.activity_main) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.myPokemon -> {
-                startActivity(Intent(this@MainActivity , ActivityMyPokemon::class.java))
+                startFeature(Activities.ActivityMyPokemon){}
             }
         }
         return true
@@ -107,9 +109,9 @@ class MainActivity : BaseActivity<MainViewModel>(R.layout.activity_main) {
             adapter = pokeAdapter
             singleItemClick { position ->
                 pokeAdapter?.let {
-                    startActivity(Intent(this@MainActivity , ActivityPokeDetail::class.java).apply {
+                    startFeature(Activities.ActivityPokeDetail){
                         putExtra("name" , it.data[position].name ?: "")
-                    })
+                    }
                 }
             }
         }

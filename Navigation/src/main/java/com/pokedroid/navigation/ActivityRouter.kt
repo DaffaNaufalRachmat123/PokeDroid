@@ -11,8 +11,8 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 
 
-private const val PACKAGE_NAME = "com.android.frezzfarm"
-private const val FEATURES = "com.frezzfarm.features"
+private const val PACKAGE_NAME = "com.android.pokedroid"
+private const val FEATURES = "com.pokedroid.features"
 
 /**
  * Create an Intent with [Intent.ACTION_VIEW] to an [AddressableActivity].
@@ -97,26 +97,11 @@ interface AddressableActivity {
  * Base object for Features activities.
  */
 object Activities {
-    object ActivityLogin : AddressableActivity {
-        override val className = "$FEATURES.auth.ActivityLogin"
+    object ActivityPokeDetail : AddressableActivity {
+        override val className = "$FEATURES.main.ActivityPokeDetail"
     }
-    object MainActivity : AddressableActivity {
-        override val className = "$FEATURES.main.MainActivity"
-    }
-    object ActivityIndexData : AddressableActivity {
-        override val className = "$FEATURES.index.ActivityIndexData"
-    }
-    object ActivityNotifications : AddressableActivity {
-        override val className = "$FEATURES.notifications.ActivityNotification"
-    }
-    object ActivityDetailKolam : AddressableActivity {
-        override val className = "$FEATURES.kolam.ActivityDetailKolam"
-    }
-    object ActivityDetailPemijahan : AddressableActivity {
-        override val className = "$FEATURES.pemijahan.ActivityDetailPemijahan"
-    }
-    object ActivityDetailPakan : AddressableActivity {
-        override val className = "$FEATURES.pakan.ActivityDetailPakan"
+    object ActivityMyPokemon : AddressableActivity {
+        override val className = "$FEATURES.main.ActivityMyPokemon"
     }
 }
 /*

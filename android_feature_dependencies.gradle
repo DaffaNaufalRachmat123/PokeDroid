@@ -11,10 +11,6 @@ kapt {
     javacOptions {
         option("-Xmaxerrs", 500)
     }
-    arguments {
-        arg("deepLink.incremental", "true")
-        arg("deepLink.customAnnotations", "com.androidpk.common.utils.WebDeepLink")
-    }
 }
 
 dependencies {

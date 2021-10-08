@@ -1,6 +1,7 @@
 package com.pokedroid.features.main
 
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
@@ -10,6 +11,7 @@ import com.dylanc.viewbinding.binding
 import com.pokedroid.common.base.BaseActivity
 import com.pokedroid.common.extension.click
 import com.pokedroid.common.extension.extra
+import com.pokedroid.common.extension.extraOrNull
 import com.pokedroid.common.extension.toast
 import com.pokedroid.common.utils.ViewState
 import com.pokedroid.common.view.statelayout.StateLayout
@@ -25,6 +27,7 @@ import java.util.*
 class ActivityPokeDetail : BaseActivity<MainViewModel>(R.layout.activity_poke_detail) {
     private val binding by binding<ActivityPokeDetailBinding>()
     private val name by extra<String>("name")
+    private val isCaught by extraOrNull<Boolean>("isCaught")
     private val stateLayout by lazy {
         StateLayout(this)
             .wrap(binding.parentContainer)
@@ -58,6 +61,20 @@ class ActivityPokeDetail : BaseActivity<MainViewModel>(R.layout.activity_poke_de
                         statAdapter?.setNewData(state.data.stats)
                         moveAdapter?.setNewData(state.data.moves)
                         typeAdapter?.setNewData(state.data.types)
+
+                        viewModel.isCaughtPokemon(state.data.name).observe(this , androidx.lifecycle.Observer {
+                            if(it != null){
+                                binding.btnCatch.text = "You've Caught This"
+                                binding.btnCatch.background = ContextCompat.getDrawable(this@ActivityPokeDetail , R.drawable.bg_top_rounded_disabled)
+                                binding.btnCatch.isEnabled = false
+                                binding.btnCatch.isClickable = false
+                            } else {
+                                binding.btnCatch.text = "Catch This!"
+                                binding.btnCatch.background = ContextCompat.getDrawable(this@ActivityPokeDetail , R.drawable.bg_top_rounded)
+                                binding.btnCatch.isEnabled = true
+                                binding.btnCatch.isClickable = true
+                            }
+                        })
                     } else {
                         stateLayout.showError()
                         stateLayout.onRetry {

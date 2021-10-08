@@ -22,6 +22,8 @@ class MainViewModel ( val api : MainApi , val dispatchers: AppDispatchers) : Bas
     val pokeDetailResponse = MutableLiveData<ViewState<PokeDetailResponse>>()
     val myPokemonList = daoProvider.pokemonDao.getMyPokemonList()
 
+    fun isCaughtPokemon(name : String) = daoProvider.pokemonDao.isPokemonCaught(name)
+
     fun catchPokemon(pokemonEntity : PokemonEntity) = viewModelScope.launch(dispatchers.main){
         daoProvider.pokemonDao.insertMyPoke(pokemonEntity)
     }

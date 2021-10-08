@@ -4,6 +4,7 @@
     <color name="black">@android:color/black</color>
     <color name="colorOverlayImage">#00000000</color>
     <color name="material_gray_5">#F3F3F3</color>
+    <color name="material_gray_6">#bdbdbd</color>
     <color name="material_green_9">#AED787</color>
     <color name="green_1">#00e676</color>
 </resources>

@@ -46,7 +46,7 @@ android {
             if (variant.buildType.name == 'debug') {
                 newName = "${variant.name}_${variant.versionName}_debug.apk"
             } else {
-                newName = 'FrezzFarm' + variant.name + '_' +
+                newName = 'PokeDroid' + variant.name + '_' +
                         variant.versionName + '_' + dateNow + '_' + timeNow + '.apk'
             }
             outputFileName = newName
@@ -126,11 +126,6 @@ kapt {
     useBuildCache = true
     javacOptions {
         option("-Xmaxerrs", 500)
-    }
-    arguments {
-        arg("deepLinkDoc.output", "${buildDir}/doc/deeplinks.txt")
-        arg("deepLink.incremental", "true")
-        arg("deepLink.customAnnotations", "com.klinday.common.utils.WebDeepLink")
     }
 }
 

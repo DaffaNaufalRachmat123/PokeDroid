@@ -3,26 +3,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMy"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_arrrow_left_black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPoki"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scrollbars="none"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarMy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-    <com.pokedroid.common.fonts.CustomTextView
-        android:id="@+id/notFoundText"
+    <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="Kamu belum nangkep Pokemon"
-        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.pokedroid.common.fonts.CustomTextView
+            android:id="@+id/notFoundText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="Kamu belum nangkep Pokemon"
+            android:textSize="18sp" />
+        <com.pokedroid.common.fonts.CustomButton
+            android:id="@+id/btnCatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_stroke_blue"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textAllCaps="false"
+            android:foreground="?attr/selectableItemBackground"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="14sp"
+            android:text="Tangkep yuk"
+            android:layout_marginTop="15dp"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

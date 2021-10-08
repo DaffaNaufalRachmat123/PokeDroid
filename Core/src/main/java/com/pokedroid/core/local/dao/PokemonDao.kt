@@ -12,6 +12,9 @@ interface PokemonDao {
     @Query("SELECT * FROM pokemon")
     fun getMyPokemonList() : LiveData<MutableList<PokemonEntity>>
 
+    @Query("SELECT * FROM pokemon WHERE name = :name")
+    fun isPokemonCaught(name : String) : LiveData<PokemonEntity>
+
     @Insert
     fun insertMyPoke(entity: PokemonEntity)
 

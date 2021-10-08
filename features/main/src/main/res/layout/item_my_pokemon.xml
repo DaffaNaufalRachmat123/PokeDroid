@@ -8,57 +8,65 @@
     app:cardUseCompatPadding="true">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.pokedroid.common.fonts.CustomTextView
-            android:id="@+id/writeNameText"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parentClicked"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:letterSpacing="0.04"
-            android:layout_marginEnd="15dp"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:text="Daffa Naufal Rachamat"
-            android:textColor="@android:color/black"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toStartOf="@+id/icRemove"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:thinText="semibold" />
-        <com.pokedroid.common.fonts.CustomTextView
-            android:id="@+id/nameText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:text="bulbusara"
-            app:layout_constraintStart_toStartOf="@id/writeNameText"
-            app:layout_constraintTop_toBottomOf="@id/writeNameText"
-            app:layout_constraintEnd_toEndOf="@id/writeNameText"/>
-        <com.pokedroid.common.fonts.CustomTextView
-            android:id="@+id/heightText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:text="Height : 16 m"
-            app:layout_constraintStart_toStartOf="@id/nameText"
-            app:layout_constraintEnd_toEndOf="@id/nameText"
-            app:layout_constraintTop_toBottomOf="@id/nameText"/>
-        <com.pokedroid.common.fonts.CustomTextView
-            android:id="@+id/weightText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:text="Weight : 69 kg"
-            android:layout_marginBottom="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/heightText"
-            app:layout_constraintEnd_toEndOf="@id/heightText"
-            app:layout_constraintTop_toBottomOf="@id/heightText"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/icRemove">
+            <com.pokedroid.common.fonts.CustomTextView
+                android:id="@+id/writeNameText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:letterSpacing="0.04"
+                android:layout_marginEnd="15dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:text="Daffa Naufal Rachamat"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:thinText="semibold" />
+            <com.pokedroid.common.fonts.CustomTextView
+                android:id="@+id/nameText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:text="bulbusara"
+                app:layout_constraintStart_toStartOf="@id/writeNameText"
+                app:layout_constraintTop_toBottomOf="@id/writeNameText"
+                app:layout_constraintEnd_toEndOf="@id/writeNameText"/>
+            <com.pokedroid.common.fonts.CustomTextView
+                android:id="@+id/heightText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:text="Height : 16 m"
+                app:layout_constraintStart_toStartOf="@id/nameText"
+                app:layout_constraintEnd_toEndOf="@id/nameText"
+                app:layout_constraintTop_toBottomOf="@id/nameText"/>
+            <com.pokedroid.common.fonts.CustomTextView
+                android:id="@+id/weightText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:text="Weight : 69 kg"
+                android:layout_marginBottom="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/heightText"
+                app:layout_constraintEnd_toEndOf="@id/heightText"
+                app:layout_constraintTop_toBottomOf="@id/heightText"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/icRemove"
