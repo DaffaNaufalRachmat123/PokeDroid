@@ -14,5 +14,6 @@ data class PokemonEntity(
     var name : String = "",
     var write_name : String ,
     var height : String ,
-    var weight : String
+    var weight : String,
+    val imageUrl : String
 )

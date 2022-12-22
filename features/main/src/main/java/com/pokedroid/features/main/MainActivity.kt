@@ -8,6 +8,7 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.core.BuildConfig
 import com.dylanc.viewbinding.binding
 import com.github.ajalt.timberkt.d
 import com.pokedroid.common.base.BaseActivity
@@ -109,8 +110,11 @@ class MainActivity : BaseActivity<MainViewModel>(R.layout.activity_main) {
             adapter = pokeAdapter
             singleItemClick { position ->
                 pokeAdapter?.let {
+                    val pokeNumber = it.data[position].url.split("${BuildConfig.BASE_URL}/api/v2/pokemon/")
+                    val imageUrl = "${BuildConfig.IMAGE_URL}${pokeNumber[1].split("/")[0]}.svg"
                     startFeature(Activities.ActivityPokeDetail){
                         putExtra("name" , it.data[position].name ?: "")
+                        putExtra("imageUrl" , imageUrl)
                     }
                 }
             }

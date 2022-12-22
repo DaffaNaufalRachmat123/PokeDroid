@@ -9,10 +9,7 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.dylanc.viewbinding.binding
 import com.pokedroid.common.base.BaseActivity
-import com.pokedroid.common.extension.click
-import com.pokedroid.common.extension.extra
-import com.pokedroid.common.extension.extraOrNull
-import com.pokedroid.common.extension.toast
+import com.pokedroid.common.extension.*
 import com.pokedroid.common.utils.ViewState
 import com.pokedroid.common.view.statelayout.StateLayout
 import com.pokedroid.core.local.entity.PokemonEntity
@@ -27,6 +24,7 @@ import java.util.*
 class ActivityPokeDetail : BaseActivity<MainViewModel>(R.layout.activity_poke_detail) {
     private val binding by binding<ActivityPokeDetailBinding>()
     private val name by extra<String>("name")
+    private val imageUrl by extra<String>("imageUrl")
     private val isCaught by extraOrNull<Boolean>("isCaught")
     private val stateLayout by lazy {
         StateLayout(this)
@@ -49,6 +47,7 @@ class ActivityPokeDetail : BaseActivity<MainViewModel>(R.layout.activity_poke_de
                         pokeDetail = state.data
                         initToolbar(binding.toolbarDetail , state.data.name)
                         stateLayout.showContent()
+                        binding.pokeImage.loadImage(imageUrl)
                         binding.nameText.text = state.data.name
                         binding.heightText.text = "Height : ${state.data.height} m"
                         binding.weightText.text = "Weight : ${state.data.weight} kg"
@@ -132,7 +131,8 @@ class ActivityPokeDetail : BaseActivity<MainViewModel>(R.layout.activity_poke_de
                             model.name,
                             itemBinding.nameText.text.toString(),
                             model.height.toString(),
-                            model.weight.toString()
+                            model.weight.toString(),
+                            imageUrl
                         )
                         toast("You Caught It!")
                         viewModel.catchPokemon(pokeEntity)

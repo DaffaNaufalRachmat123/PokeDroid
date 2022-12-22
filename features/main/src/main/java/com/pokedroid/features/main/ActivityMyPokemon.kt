@@ -50,6 +50,7 @@ class ActivityMyPokemon : BaseActivity<MainViewModel>(R.layout.activity_my_pokem
             onItemClicked = { model ->
                 startFeature(Activities.ActivityPokeDetail){
                     putExtra("name" , model.name)
+                    putExtra("imageUrl" , model.imageUrl)
                     putExtra("isCaught" , true)
                 }
             },

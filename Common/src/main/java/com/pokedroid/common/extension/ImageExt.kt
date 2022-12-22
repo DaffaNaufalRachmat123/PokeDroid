@@ -16,12 +16,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.caverock.androidsvg.SVG
 import com.github.ajalt.timberkt.e
 import com.pokedroid.common.R
 import com.pokedroid.common.view.ShimmerDrawable
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
-import java.io.File
-
 fun Drawable.copy() = constantState?.newDrawable()?.mutate()
 
 @SuppressLint("CheckResult")
@@ -173,26 +172,13 @@ fun ImageView.loadImageCenterCrop(url: String?) {
     usingRounded(url.orDefaultImage(), 0)
 }
 
-fun ImageView.loadImageRounded(url: String?, radius: Int = 8.dpToPx) {
-    usingRounded(url.orDefaultImage(), radius)
-}
-
-fun ImageView.loadImageRoundedWidthAndHeight(url : String? , radius : Int = 8.dpToPx , width : Int , height : Int) = usingRoundedWidthAndHeight(width , height , url.orDefaultImage() , radius)
-
-fun ImageView.loadImageRounded(url: File?, radius: Int = 8) {
+fun ImageView.loadImage(url: String?, radius: Int = 8) {
     try {
         Glide.with(context)
             .load(url)
-            .apply(getGlideOptions(this, errorDrawable = R.drawable.ic_no_image))
-            .fitCenter()
-            .dontAnimate()
-            .transform(
-                CenterCrop(),
-                RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)
-            )
+            .placeholder(ShimmerDrawable())
+            .error(R.drawable.ic_no_image)
             .into(this)
-            .waitForLayout()
-            .clearOnDetach()
     } catch (ex: IllegalArgumentException) {
         e { "Error loadImageRounded : ${ex.message}" }
     }

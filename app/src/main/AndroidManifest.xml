@@ -33,9 +33,6 @@
             <meta-data
                 android:name="com.android.pokedroid.initializer.TimberInitializer"
                 android:value="androidx.startup" />
-            <!--<meta-data
-                android:name="com.android.frezzfarm.initializer.CrashReporterInitializer"
-                android:value="androidx.startup" />-->
         </provider>
     </application>
 

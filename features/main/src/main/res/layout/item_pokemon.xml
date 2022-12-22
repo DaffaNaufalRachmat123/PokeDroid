@@ -5,30 +5,40 @@
     android:padding="10dp"
     android:foreground="?attr/selectableItemBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/pokeImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <com.pokedroid.common.fonts.CustomTextView
         android:id="@+id/nameText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
         android:gravity="start"
-        android:text="Pokemon"
-        android:textSize="18sp"
-        app:thinText="semibold"
         android:letterSpacing="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="Pokemon"
+        android:layout_marginStart="15dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/pokeImage"
         app:layout_constraintEnd_toStartOf="@id/idText"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/pokeImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:thinText="semibold" />
+
     <com.pokedroid.common.fonts.CustomTextView
         android:id="@+id/idText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="#"
         android:gravity="end"
+        android:text="#"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/nameText"
-        app:layout_constraintBottom_toBottomOf="@id/nameText"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/nameText"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        app:layout_constraintTop_toTopOf="@+id/pokeImage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

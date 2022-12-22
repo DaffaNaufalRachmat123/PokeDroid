@@ -2,6 +2,7 @@ package com.pokedroid.common.glide
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.graphics.drawable.PictureDrawable
 import android.os.Build
 import androidx.annotation.Keep
 import com.pokedroid.common.base.BaseApp
@@ -20,17 +21,15 @@ import com.bumptech.glide.load.engine.cache.LruResourceCache
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestOptions
+import com.pokedroid.common.extension.SvgOrImageDecodedResource
+import com.pokedroid.common.extension.SvgOrImageDecoder
+import com.pokedroid.common.extension.SvgOrImageDrawableTranscoder
 import okhttp3.OkHttpClient
 import java.io.File
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
 
 
-/**
- * Created on : 8/26/20.
- * Author     : Musthofa Ali Ubaed
- * Email      : panic.inc.dev@gmail.com
- */
 @Keep
 @GlideModule
 class PkGlideModule : AppGlideModule() {
@@ -100,7 +99,11 @@ class PkGlideModule : AppGlideModule() {
             GlideUrl::class.java,
             InputStream::class.java, factory
         )
-//        registry.append(String::class.java, InputStream::class.java, PkGlideUrlLoader.Factory())
+        registry.register(SvgOrImageDecodedResource::class.java , PictureDrawable::class.java ,
+        SvgOrImageDrawableTranscoder()).append(
+            InputStream::class.java,
+            SvgOrImageDecodedResource::class.java,SvgOrImageDecoder()
+        )
     }
 
     private fun getBitmapQuality(hasLowRam: Boolean): DecodeFormat {

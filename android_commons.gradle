@@ -25,17 +25,20 @@ android {
             dimension "environment"
             versionNameSuffix "-dev"
             buildConfigField("String", "BASE_URL", buildEnvironmentProperties["DEV_ENDPOINT"])
+            buildConfigField("String" , "IMAGE_URL" , buildEnvironmentProperties["IMAGE_URL"])
         }
 
         staging {
             dimension "environment"
             versionNameSuffix "-staging"
             buildConfigField("String", "BASE_URL", buildEnvironmentProperties["STAG_ENDPOINT"])
+            buildConfigField("String" , "IMAGE_URL" , buildEnvironmentProperties["IMAGE_URL"])
         }
 
         prod {
             dimension "environment"
             buildConfigField("String", "BASE_URL", buildEnvironmentProperties["PROD_ENDPOINT"])
+            buildConfigField("String" , "IMAGE_URL" , buildEnvironmentProperties["IMAGE_URL"])
         }
     }
 

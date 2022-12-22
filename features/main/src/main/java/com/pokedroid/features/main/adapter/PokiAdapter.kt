@@ -3,6 +3,7 @@ package com.pokedroid.features.main.adapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.pokedroid.common.extension.click
+import com.pokedroid.common.extension.loadImage
 import com.pokedroid.core.local.entity.PokemonEntity
 import com.pokedroid.features.main.R
 import com.pokedroid.features.main.databinding.ItemMyPokemonBinding
@@ -15,6 +16,7 @@ class PokiAdapter ( val onItemClicked : (PokemonEntity) -> Unit , val onRemoveCl
             itemBinding.nameText.text = model.name
             itemBinding.weightText.text = "${model.weight} Kg"
             itemBinding.heightText.text = "${model.height} m"
+            itemBinding.pokeImage.loadImage(model.imageUrl)
             itemBinding.parentClicked.click {
                 onItemClicked.invoke(model)
             }
